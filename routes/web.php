@@ -19,3 +19,13 @@ Route::get('/', function () {
 Route::get('user', function () {
     return view('user.show');
 })->name('user.show');
+
+// route to render view from controller
+Route::get('user/create', 'UserController@create')
+    ->name('user.create');
+
+// prefix
+Route::prefix('admin')->group(function () {
+    // route with parameters
+    Route::get('users/{id}/edit', 'UserController@edit')->name('user.edit');
+});

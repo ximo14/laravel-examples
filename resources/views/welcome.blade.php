@@ -86,6 +86,8 @@
 
                 <div class="links">
                     <a href="{{ route('user.show') }}">User show</a>
+                    <a href="{{ route('user.create') }}">User create</a>
+                    <a href="{{ route('user.edit', ['id' => 100]) }}">User edit</a>
                 </div>
             </div>
         </div>
