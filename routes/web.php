@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// route to render view from route
+Route::get('user', function () {
+    return view('user.show');
+})->name('user.show');
