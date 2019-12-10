@@ -80,6 +80,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return view('user.destroy', ['id' => $id]);
     }
 }

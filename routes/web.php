@@ -29,3 +29,12 @@ Route::prefix('admin')->group(function () {
     // route with parameters
     Route::get('users/{id}/edit', 'UserController@edit')->name('user.edit');
 });
+
+// middleware
+Route::get('user/{id}/destroy', 'UserController@destroy')
+    ->name('user.destroy')
+    ->middleware('check.user');
+
+Route::get('user/redirect', function () {
+    return view('user.redirect');
+})->name('user.redirect');

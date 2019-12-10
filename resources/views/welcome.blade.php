@@ -88,6 +88,8 @@
                     <a href="{{ route('user.show') }}">User show</a>
                     <a href="{{ route('user.create') }}">User create</a>
                     <a href="{{ route('user.edit', ['id' => 100]) }}">User edit</a>
+                    <a href="{{ route('user.destroy', ['id' => 5]) }}">User without middleware</a>
+                    <a href="{{ route('user.destroy', ['id' => 100]) }}">User middleware</a>
                 </div>
             </div>
         </div>
