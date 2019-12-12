@@ -1,0 +1,1 @@
+user {{ $name }} with password {{ $password }} stored succesfully

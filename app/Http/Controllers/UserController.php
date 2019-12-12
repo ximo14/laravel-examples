@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserPost;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function __construct() 
+    {
+        // middleware in construct
+        $this->middleware('check.user')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('user.create');
     }
@@ -32,9 +39,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserPost $request)
     {
-        //
+
+        $validated = $request->validated();
+
+        // if ($validated == false)
+        // {
+        //     return view('user.redirect');
+        // }
+
+        $name = $request->input('name');
+
+        $password = $request->input('password');
+
+        print_r($validated);
+        return view('user.store', ['name' => $name, 'password' => $password, 'validated' => $validated]);
+        
     }
 
     /**
@@ -54,10 +75,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        // get the request route
+        $path = $request->path();
+
         // return view with parameter
-        return view('user.edit', ['id' => $id]);
+        return view('user.edit', ['id' => $id, 'path' => $path]);
     }
 
     /**

@@ -30,11 +30,13 @@ Route::prefix('admin')->group(function () {
     Route::get('users/{id}/edit', 'UserController@edit')->name('user.edit');
 });
 
-// middleware
-Route::get('user/{id}/destroy', 'UserController@destroy')
-    ->name('user.destroy')
-    ->middleware('check.user');
+// middleware in controller
+Route::any('user/{id}/destroy', 'UserController@destroy')
+    ->name('user.destroy');
 
 Route::get('user/redirect', function () {
     return view('user.redirect');
 })->name('user.redirect');
+
+// store
+Route::post('user/store', 'UserController@store')->name('user.store');

@@ -15,8 +15,10 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
-        if ($request->id >= 50) {
-            return redirect('user/redirect');
+        if ($request->id >= 50) 
+        {
+            // redirect to a route
+            return redirect()->route('user.redirect');
         }
 
         return $next($request);
