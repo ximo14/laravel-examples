@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserPost;
 use Illuminate\Http\Request;
+use App\Flight;
 
-class UserController extends Controller
+class FlightController extends Controller
 {
-
-    public function __construct() 
-    {
-        // middleware in construct
-        $this->middleware('check.user')->only('destroy');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $flights = Flight::all();
+
+        return view('flight.index', ['flights' => $flights]);
     }
 
     /**
@@ -28,9 +24,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('user.create');
+        return view('flight.create');
     }
 
     /**
@@ -39,17 +35,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserPost $request)
+    public function store(Request $request)
     {
+        $flight = new Flight;
 
-        $validated = $request->validated();
-
-        $name = $request->input('name');
-
-        $password = $request->input('password');
-
-        return view('user.store', ['name' => $name, 'password' => $password, 'validated' => $validated]);
+        $flight->name = $request->name;
         
+        $flight->airline = $request->airline;
+
+        $flight->save();
+
+        return view('flight.store', ['flight' => $flight]);
     }
 
     /**
@@ -60,7 +56,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $flight = Flight::find($id);
+
+        return view('flight.show', ['flight' => $flight]);
     }
 
     /**
@@ -69,13 +67,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        // get the request route
-        $path = $request->path();
-
-        // return view with parameter
-        return view('user.edit', ['id' => $id, 'path' => $path]);
+        //
     }
 
     /**
@@ -98,6 +92,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return view('user.destroy', ['id' => $id]);
+        //
     }
 }

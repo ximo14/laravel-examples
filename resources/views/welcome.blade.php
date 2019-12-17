@@ -90,6 +90,8 @@
                     <a href="{{ route('user.edit', ['id' => 100]) }}">User edit</a>
                     <a href="{{ route('user.destroy', ['id' => 5]) }}">User without middleware</a>
                     <a href="{{ route('user.destroy', ['id' => 100]) }}">User middleware</a>
+                    <a href="{{ route('course.create') }}">Course create</a>
+
                 </div>
             </div>
         </div>

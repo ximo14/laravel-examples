@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserPost;
 use Illuminate\Http\Request;
+use App\Student;
 
-class UserController extends Controller
+class StudentsController extends Controller
 {
-
-    public function __construct() 
-    {
-        // middleware in construct
-        $this->middleware('check.user')->only('destroy');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+
+        return view('student.index', ['students' => $students]);
     }
 
     /**
@@ -28,9 +24,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('user.create');
+        return view('student.create');
     }
 
     /**
@@ -39,17 +35,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserPost $request)
+    public function store(Request $request)
     {
+        // $validate = blsjfkdshkfj
 
-        $validated = $request->validated();
+        Student::create($request->all());
 
-        $name = $request->input('name');
-
-        $password = $request->input('password');
-
-        return view('user.store', ['name' => $name, 'password' => $password, 'validated' => $validated]);
-        
+        return redirect()->route('student.index');
     }
 
     /**
@@ -60,7 +52,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+
+        return view('student.show', ['student' => $student]);
     }
 
     /**
@@ -69,13 +63,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        // get the request route
-        $path = $request->path();
+        
+        $student = Student::find($id);
 
-        // return view with parameter
-        return view('user.edit', ['id' => $id, 'path' => $path]);
+        return view('student.edit', ['student' => $student]);
+
     }
 
     /**
@@ -87,7 +81,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+
+        $student->update($request->all());
+
+        return redirect()->route('student.index');
+
     }
 
     /**
@@ -98,6 +97,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return view('user.destroy', ['id' => $id]);
+        $student = Student::find($id);
+
+        $student->delete();
+
+        return redirect()->route('student.index');
+
     }
 }

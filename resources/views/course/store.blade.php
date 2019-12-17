@@ -1,0 +1,1 @@
+course {{ $title }}, teacher {{ $teacher }} stored successfully!

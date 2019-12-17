@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserPost;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateCoursePost;
 
-class UserController extends Controller
+class CoursesController extends Controller
 {
-
-    public function __construct() 
-    {
-        // middleware in construct
-        $this->middleware('check.user')->only('destroy');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +22,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('user.create');
+        return view('course.create');
     }
 
     /**
@@ -39,17 +33,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserPost $request)
+    public function store(CreateCoursePost $request)
     {
-
-        $validated = $request->validated();
-
-        $name = $request->input('name');
-
-        $password = $request->input('password');
-
-        return view('user.store', ['name' => $name, 'password' => $password, 'validated' => $validated]);
+        $validated = $request->validated();        
         
+        $title = $request->input('title');
+        
+        $teacher = $request->input('teacher');
+
+        return view('course.store', ['title' => $title, 'teacher' => $teacher]);
     }
 
     /**
@@ -69,13 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        // get the request route
-        $path = $request->path();
-
-        // return view with parameter
-        return view('user.edit', ['id' => $id, 'path' => $path]);
+        //
     }
 
     /**
@@ -98,6 +86,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return view('user.destroy', ['id' => $id]);
+        //
     }
 }
