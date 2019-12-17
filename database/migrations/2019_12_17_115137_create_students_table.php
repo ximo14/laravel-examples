@@ -16,7 +16,8 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('course');
+            $table->bigInteger('course_id')->unsigned()->unique();;
+            $table->foreign('course_id')->references('id')->on('course');
             $table->timestamps();
         });
     }

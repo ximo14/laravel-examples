@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\Course;
 
 class StudentsController extends Controller
 {
@@ -26,7 +27,9 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $courses = Course::all();
+
+        return view('student.create', ['courses' => $courses]);
     }
 
     /**
@@ -39,7 +42,14 @@ class StudentsController extends Controller
     {
         // $validate = blsjfkdshkfj
 
-        Student::create($request->all());
+        // Student::create($request->all());
+
+        $student = new Student();
+        $student->name = $request->name;
+
+        $course = Course::find($request->course_id);
+
+        $course->student()->save($student);
 
         return redirect()->route('student.index');
     }

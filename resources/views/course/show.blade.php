@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Store</title>
+    <title>Document</title>
 </head>
 <body>
-    name:  {{ $flight->name }} 
-    <br>
-    airline: {{ $flight->airline }}
+    Student with Id {{ $course->id }}:
+    <ul>
+    <li>Name {{ $course->name }}</li>
+    <li>Created date {{ $course->created_at }}</li>
+    </ul>
 </body>
 </html>

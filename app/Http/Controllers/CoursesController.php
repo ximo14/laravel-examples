@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCoursePost;
+use App\Course;
 
 class CoursesController extends Controller
 {
@@ -14,7 +15,10 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        
+        return view('course.index', ['courses' => $courses]);
+
     }
 
     /**
@@ -33,15 +37,11 @@ class CoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCoursePost $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();        
-        
-        $title = $request->input('title');
-        
-        $teacher = $request->input('teacher');
+        Course::create($request->all());
 
-        return view('course.store', ['title' => $title, 'teacher' => $teacher]);
+        return redirect()->route('course.index');
     }
 
     /**
@@ -52,7 +52,9 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        return view('course.show', ['course' => $course]);
     }
 
     /**
@@ -63,7 +65,9 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        return view('course.edit', ['course' => $course]);
     }
 
     /**
@@ -75,7 +79,12 @@ class CoursesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        $course->update($request->all());
+
+        return redirect()->route('course.index');
+
     }
 
     /**
@@ -86,6 +95,11 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        $course->delete();
+
+        return redirect()->route('course.index');
+
     }
 }

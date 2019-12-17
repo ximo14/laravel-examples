@@ -18,22 +18,22 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Course</th>
+                    <th>Student</th>
                     <th scope="col">Created date</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($students as $student)
+                @foreach ($courses as $course)
                 <tr>
-                    <td>{{ $student->id }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->course_id }}</td>
-                    <td>{{ $student->created_at }}</td>
+                    <td>{{ $course->id }}</td>
+                    <td>{{ $course->name }}</td>
+                    <td>{{ $course->student->name ?? '' }}</td>
+                    <td>{{ $course->created_at }}</td>
                     <td>
-                        <a href="{{ route('student.show', $student->id) }}" class="fa fa-eye"></a>
-                        <a href="{{ route('student.edit', $student->id) }}" class="fas fa-edit"></a>
-                        <form action="{{ route('student.destroy', $student->id)}}" method="post">
+                        <a href="{{ route('course.show', $course->id) }}" class="fa fa-eye"></a>
+                        <a href="{{ route('course.edit', $course->id) }}" class="fas fa-edit"></a>
+                        <form action="{{ route('course.destroy', $course->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit"><i class="fas fa-trash"></i></button>

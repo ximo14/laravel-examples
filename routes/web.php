@@ -42,11 +42,26 @@ Route::get('user/redirect', function () {
 Route::post('user/store', 'UserController@store')->name('user.store');
 
 // COURSE CONTROLLER
+Route::get('course/index', 'CoursesController@index')
+    ->name('course.index');
+
 Route::get('course/create', 'CoursesController@create')
     ->name('course.create');
 
 Route::post('course/store', 'CoursesController@store')
     ->name('course.store');
+
+Route::get('course/{id}', 'CoursesController@show')
+    ->name('course.show');
+
+Route::get('course/{id}/edit', 'CoursesController@edit')
+    ->name('course.edit');
+
+Route::put('course/{id}', 'CoursesController@update')
+    ->name('course.update');
+
+Route::delete('course/{id}/destroy', 'CoursesController@destroy')
+    ->name('course.destroy');
 
 // FLIGHT ROUTING
 

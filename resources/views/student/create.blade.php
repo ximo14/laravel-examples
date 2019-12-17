@@ -20,7 +20,11 @@
             </div>
             <div class="form-group">
                 <label for="course">Course</label>
-                <input type="text" class="form-control" name="course" placeholder="Course">
+                <select name="course_id" id="">
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
