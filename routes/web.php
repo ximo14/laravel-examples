@@ -98,3 +98,13 @@ Route::put('student/{id}', 'StudentsController@update')
 
 Route::delete('student/{id}/destroy', 'StudentsController@destroy')
     ->name('student.destroy');
+
+// AIRLINE ROUTING
+Route::get('airline/index', 'AirlineController@index')
+    ->name('airline.index');
+
+Route::get('airline/create', 'AirlineController@create')
+    ->name('airline.create');
+
+Route::post('airline/store', 'AirlineController@store')
+    ->name('airline.store');

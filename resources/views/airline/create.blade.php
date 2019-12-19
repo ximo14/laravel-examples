@@ -8,34 +8,18 @@
     <title>Create flight</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Airline</th>
-                    <th scope="col">Created date</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($flights as $flight)
-                <tr>
-                    <td>{{ $flight->id }}</td>
-                    <td>{{ $flight->name }}</td>
-                    <td>{{ $flight->airline->name }}</td>
-                    <td>{{ $flight->created_at }}</td>
-                    <td><a href="{{ route('flight.show', $flight->id) }}" class="fa fa-eye"></a></td>
-                </tr>
-                @endforeach
-
-            </tbody>
-        </table>
+        <form action="{{ route('airline.store') }}" method="post">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

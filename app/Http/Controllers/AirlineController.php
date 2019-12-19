@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Flight;
 use App\Airline;
 
-class FlightController extends Controller
+class AirlineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class FlightController extends Controller
      */
     public function index()
     {
-        $flights = Flight::all();
+        $airlines = Airline::all();
 
-        return view('flight.index', ['flights' => $flights]);
+        return view('airline.index', ['airlines' => $airlines]);
     }
 
     /**
@@ -27,9 +26,7 @@ class FlightController extends Controller
      */
     public function create()
     {
-        $airlines = Airline::all();
-
-        return view('flight.create', ['airlines' => $airlines]);
+        return view('airline.create');
     }
 
     /**
@@ -40,16 +37,9 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        Flight::create($request->all());
-        // $flight = new Flight;
+        Airline::create($request->all());
 
-        // $flight->name = $request->name;
-        
-        // $flight->airline = $request->airline;
-
-        // $flight->save();
-
-        return redirect()->route('flight.index');
+        return redirect()->route('airline.index');
     }
 
     /**
@@ -60,9 +50,7 @@ class FlightController extends Controller
      */
     public function show($id)
     {
-        $flight = Flight::find($id);
-
-        return view('flight.show', ['flight' => $flight]);
+        //
     }
 
     /**

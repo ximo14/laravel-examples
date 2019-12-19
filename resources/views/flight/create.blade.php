@@ -20,7 +20,11 @@
             </div>
             <div class="form-group">
                 <label for="airline">Airline</label>
-                <input type="text" class="form-control" name="airline" placeholder="Airline">
+                <select name="airline_id" id="">
+                    @foreach($airlines as $airline)
+                    <option value="{{ $airline->id }}">{{ $airline->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
