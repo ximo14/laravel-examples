@@ -8,10 +8,10 @@ class Student extends Model
 {
     protected $fillable = ['name'];
 
-    // public function course()
-    // {
+    public function courses()
+    {
 
-    //     return $this->belongsTo('App\Course');
+        return $this->belongsToMany('App\Course');
 
-    // }
+    }
 }

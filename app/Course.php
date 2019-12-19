@@ -11,8 +11,14 @@ class Course extends Model
 
     protected $fillable = ['name'];
 
-    public function student()
+    // public function student()
+    // {
+    //     return $this->hasOne('App\Student');
+    // }
+
+    
+    public function students()
     {
-        return $this->hasOne('App\Student');
+        return $this->belongsToMany('App\Student');
     }
 }

@@ -28,7 +28,10 @@
                 <tr>
                     <td>{{ $student->id }}</td>
                     <td>{{ $student->name }}</td>
-                    <td>{{ $student->course_id }}</td>
+                    <td>
+                        @foreach($student->courses as $course)
+                        {{ $course->name }},
+                        @endforeach
                     <td>{{ $student->created_at }}</td>
                     <td>
                         <a href="{{ route('student.show', $student->id) }}" class="fa fa-eye"></a>

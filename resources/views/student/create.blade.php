@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="course">Course</label>
-                <select name="course_id" id="">
+                <select name="courses_id[]" id="" multiple>
                 @foreach ($courses as $course)
                     <option value="{{ $course->id }}">{{ $course->name }}</option>
                 @endforeach

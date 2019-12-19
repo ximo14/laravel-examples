@@ -40,16 +40,14 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        // $validate = blsjfkdshkfj
 
-        // Student::create($request->all());
-
-        $student = new Student();
+        $student = new Student;
         $student->name = $request->name;
 
-        $course = Course::find($request->course_id);
+        $student->save();
 
-        $course->student()->save($student);
+        $courses = Course::find($request->courses_id);
+        $student->courses()->attach($courses);
 
         return redirect()->route('student.index');
     }
